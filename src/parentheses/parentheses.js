@@ -7,19 +7,15 @@ const match = (expression) => {
       stack.push("(");
     } else {
       if (expression[i] === ")") {
-        if (stack.top !== null) {
-          stack.pop("(");
+        if (stack.top) {
+          stack.pop();
         } else {
           return false;
         }
       }
     }
   }
-  if (stack.top === null) {
-    return true;
-  } else {
-    return false;
-  }
+  return !stack.top;
 };
 
 module.exports = match;

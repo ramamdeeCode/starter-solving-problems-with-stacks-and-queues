@@ -21,30 +21,51 @@ console.log(is_palindrome("Tauhida"));
 */
 const Stack = require("../lib/stack");
 
-const isPalindrome = (string) => {
-  // Lowercase and remove special characters from string
-  string = string.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+const isPalindrome = (sentence) => {
+  sentence = sentence.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  let middle = Math.floor(sentence.length / 2);
 
-  // Create a new stack
-  let stack = new Stack();
+  const stack = new Stack();
 
-  // Populate our stack with our string characters
-  for (let i = 0; i < string.length; i++) {
-    stack.push(string[i]);
+  for (let index = 0; index < middle; index++) {
+    stack.push(sentence[index]);
   }
 
-  // Declare a variable to store the reverse order
-  let reverseString = "";
+  middle += sentence.length % 2 === 0 ? 0 : 1;
 
-  // While the top isn't null, pop the values off the stack
-  while (stack.top !== null) {
-    reverseString += stack.pop();
+  for (let index = middle, limit = sentence.length; index < limit; index++) {
+    if (sentence[index] !== stack.pop()) {
+      return false;
+    }
   }
 
-  // Validate if both strings are the same
-
-  return string === reverseString;
+  return true;
 };
+
+// const isPalindrome = (string) => {
+//   // Lowercase and remove special characters from string
+//   string = string.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+
+//   // Create a new stack
+//   let stack = new Stack();
+
+//   // Populate our stack with our string characters
+//   for (let i = 0; i < string.length; i++) {
+//     stack.push(string[i]);
+//   }
+
+//   // Declare a variable to store the reverse order
+//   let reverseString = "";
+
+//   // While the top isn't null, pop the values off the stack
+//   while (stack.top !== null) {
+//     reverseString += stack.pop();
+//   }
+
+//   // Validate if both strings are the same
+
+//   return string === reverseString;
+// };
 module.exports = isPalindrome;
 
 // console.log(is_palindrome("dad"));
